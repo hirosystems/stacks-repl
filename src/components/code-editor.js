@@ -1,5 +1,5 @@
 import React from "react";
-import MonacoEditor, { MonacoDiffEditor } from "react-monaco-editor";
+import MonacoEditor from "react-monaco-editor";
 
 export class CodeEditor extends React.Component {
   constructor(props) {
@@ -13,55 +13,12 @@ export class CodeEditor extends React.Component {
     console.log("onChange", newValue); // eslint-disable-line no-console
   };
 
-  fetchStacksDependencies = async () => {
-    if (this.stacksDeps) return;
-    if (!this.stacksProm) {
-      const deps = ["network"];
-      this.stacksProm = Promise.all([
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/network`], (stacksPackage) => {
-            resolve(stacksPackage);
-          });
-        }),
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/connect`], (stacksPackage) => {
-            resolve(stacksPackage);
-          });
-        }),
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/auth`], (stacksPackage) => {
-            resolve(stacksPackage);
-          });
-        }),
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/common`], (stacksPackage) => {
-            resolve(stacksPackage);
-          });
-        }),
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/transactions`], (
-            stacksPackage
-          ) => {
-            resolve(stacksPackage);
-          });
-        }),
-        new Promise((resolve) => {
-          require([`../../node_modules/@stacks/stacking`], (stacksPackage) => {
-            resolve(stacksPackage);
-          });
-        }),
-      ]);
-      this.stacksDeps = await this.stacksProm;
-    } else {
-      this.stacksDeps = await this.stacksProm;
-    }
-  };
-
   editorDidMount = async (editor) => {
     // eslint-disable-next-line no-console
     console.log("editorDidMount", editor, editor.getValue(), editor.getModel());
     this.editor = editor;
-    this.fetchStacksDependencies();
+  };
+
   runit = async () => {
     const userCode = this.editor.getValue();
 
