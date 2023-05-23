@@ -20,37 +20,25 @@ export class CodeEditor extends React.Component {
   };
 
   runit = async () => {
-    const userCode = this.editor.getValue();
+    const code = this.editor.getValue();
+    const script = document.createElement("script");
 
-    if (!this.stacksDeps) {
-      await this.fetchStacksDependencies();
-    }
+    const consoleCode = `
+      const oldConsole = console;
+      console = {log: (...args) => {
+        const child = document.createElement("div");
+        child.innerHTML = JSON.stringify(args[1]);
+        document
+          .getElementById("1")
+          .appendChild(child);
+      }};
+      ${code}
+      console = oldConsole;
+    `;
+    script.innerHTML = consoleCode;
+    script.setAttribute("type", "module");
 
-    const AsyncFunction = Object.getPrototypeOf(
-      async function () {}
-    ).constructor;
-
-    console.log(this.stacksDeps);
-    const fn = new AsyncFunction(
-      "stacksNetwork",
-      "stacksConnect",
-      "stacksAuth",
-      "stacksCommon",
-      "stacksTransactions",
-      "stacksStacking",
-      `with ({...stacksNetwork, ...stacksConnect, ...stacksAuth, ...stacksCommon, ...stacksTransactions, ...stacksStacking })
-      try {
-        return  (async () => {
-          "use strict";
-          {
-            ${code}
-          }
-        })();
-    } catch(e) {
-        console.log(e);
-    }`
-    );
-    fn(...this.stacksDeps);
+    document.head.appendChild(script);
   };
 
   render() {
@@ -61,9 +49,9 @@ export class CodeEditor extends React.Component {
       readOnly: false,
       cursorStyle: "line",
       automaticLayout: false,
-  };
+    };
     return (
-      <div>
+      <div id="1">
         <MonacoEditor
           height="400"
           language="javascript"
