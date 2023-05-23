@@ -3,20 +3,28 @@ import { createRoot } from "react-dom/client";
 import { CodeEditor } from "./components/code-editor";
 
 class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      code: "// Add some code",
+    };
+  }
+
+  async componentDidMount() {
+    await this.getCode("/stuff");
+  }
+
+  getCode = async (route) => {
+    const response = await fetch(route);
+    const { data: code } = await response.json();
+    this.setState({ code });
+  };
+
   render() {
-    let code = `import { StacksMainnet } from "@stacks/network";
-import { StackingClient } from "@stacks/stacking";
-
-const network = new StacksMainnet();
-const client = new StackingClient("", network);
-
-const periodInfo = await client.getPoxOperationInfo();
-console.log("🦁", periodInfo);`;
-
     return (
       <div>
         <h2>Monaco Editor Sample (controlled mode)</h2>
-        <CodeEditor code={code} />
+        <CodeEditor key={this.state.code} code={this.state.code} />
         <hr />
       </div>
     );

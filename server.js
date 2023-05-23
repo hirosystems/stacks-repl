@@ -20,6 +20,14 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "./index.html"));
 });
 
+app.get("/stuff", (req, res) => {
+  const data = fs.readFileSync(
+    path.join(__dirname, "./src/snippets/test.js"),
+    "utf8"
+  );
+  res.send({ data });
+});
+
 // Serve the files on port 3000.
 app.listen(3000, function () {
   console.log("Example app listening on port 3000!\n");
