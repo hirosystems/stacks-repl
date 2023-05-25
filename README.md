@@ -42,7 +42,7 @@ Stacks REPL helps you generate runtime responses connecting to the stacks networ
 - mainnet
 - testnet
 
-### Supported Methods
+### Methods
 
 :::note
 
@@ -59,7 +59,7 @@ You can follow the links for each method to understand its usage.
 - [getStatus()](https://docs.hiro.so/stacks.js/how-to-guides/how-to-integrate-stacking#step-3-display-stacking-info)
 - [canStack()](https://docs.hiro.so/stacks.js/how-to-guides/how-to-integrate-stacking#step-4-verify-stacking-eligibility)
 
-# Example Walkthrough
+## Example Walkthrough
 
 Follow this video to understand an example.
 // Link to be added after Max's recording.
