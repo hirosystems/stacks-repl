@@ -1,7 +1,7 @@
 ## Introduction
 
-Stacks REPL project enables users to try out Stacks API without the overhead of installation. 
-It allows users to change and run API's from a browser. It is fast with a low learning curve.  
+The Stacks REPL project enables users to try out Stacks API without the installation overhead. 
+It allows users to change and run API from a browser. It is fast with a low learning curve.  
 
 Follow the instructions below to install the application and interact with the code.
 
@@ -29,9 +29,9 @@ You can start the application by using the following command.
 
 ## REPL Usage
 
-After stating the application in a browser, users can use the live editor to interact with the Stacks API's. Navigate to the landing page where there is a live editor with an example method `getPoxOperationInfo()`.
+After starting the application in a browser, users can use the live editor to interact with the Stacks API. Navigate to the landing page where there is a live editor with an example method, `getPoxOperationInfo().`
 
-Stacks REPL helps you generate runtime resposes connecting to the stacks network. The sample interactive code and its response looks like this:
+Stacks REPL helps you generate runtime responses connecting to the stacks network. The sample interactive code and its response look like this:
 
 ![Example](../stacks-repl/get_pox_operation_info_example.jpeg)
 
@@ -46,7 +46,7 @@ Stacks REPL helps you generate runtime resposes connecting to the stacks network
 
 :::note
 
-You can follow the links for each of the following methods to understand its usage.
+You can follow the links for each method to understand its usage.
 
 :::
 
